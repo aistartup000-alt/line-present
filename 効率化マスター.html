@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>⚡ 効率化マスター型｜AI START CLUB</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Hiragino Kaku Gothic Pro', 'Noto Sans JP', 'Yu Gothic', sans-serif;
+    background: #f0f8ff;
+    color: #1a1a2e;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+  .container { max-width: 680px; margin: 0 auto; padding: 0 0 48px; }
+
+  /* カバー */
+  .cover {
+    background: linear-gradient(135deg, #0277BD 0%, #0288D1 50%, #00BCD4 100%);
+    color: white;
+    padding: 52px 24px 44px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 280px; height: 280px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.07);
+  }
+  .cover::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: -40px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.05);
+  }
+  .cover .badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.35);
+    border-radius: 20px;
+    padding: 5px 18px;
+    font-size: 11px;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+  }
+  .cover .type-icon { font-size: 64px; display: block; margin-bottom: 16px; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.2)); }
+  .cover .type-label {
+    font-size: 12px; letter-spacing: 3px;
+    opacity: 0.85; margin-bottom: 8px;
+  }
+  .cover h1 {
+    font-size: 28px; font-weight: 900;
+    line-height: 1.3; margin-bottom: 14px;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+  .cover .catch {
+    font-size: 14px; opacity: 0.9;
+    line-height: 1.8;
+    background: rgba(255,255,255,0.15);
+    border-radius: 10px;
+    padding: 10px 20px;
+    display: inline-block;
+  }
+  .cover .logo { font-size: 10px; letter-spacing: 4px; opacity: 0.5; margin-top: 24px; }
+
+  /* セクション共通 */
+  .section {
+    background: white;
+    margin: 16px;
+    border-radius: 20px;
+    padding: 24px 20px;
+    box-shadow: 0 2px 20px rgba(2,136,209,0.08);
+  }
+  .sec-title {
+    font-size: 13px; font-weight: 700; color: #0277BD;
+    margin-bottom: 18px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e1f5fe;
+    display: flex; align-items: center; gap: 8px;
+  }
+
+  /* 特徴チェックリスト */
+  .check-list { list-style: none; }
+  .check-list li {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid #f0f8ff;
+    font-size: 14px;
+  }
+  .check-list li:last-child { border-bottom: none; padding-bottom: 0; }
+  .check-list li .check {
+    width: 22px; height: 22px; border-radius: 50%;
+    background: linear-gradient(135deg, #0288D1, #00BCD4);
+    color: white; font-size: 12px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+
+  /* 強みバナー */
+  .strength-banner {
+    background: linear-gradient(135deg, #e1f5fe, #b3e5fc);
+    border-left: 4px solid #0288D1;
+    border-radius: 0 12px 12px 0;
+    padding: 16px 18px;
+    margin-top: 16px;
+  }
+  .strength-banner .label {
+    font-size: 11px; font-weight: 700; color: #0277BD;
+    letter-spacing: 1px; margin-bottom: 6px;
+  }
+  .strength-banner p { font-size: 14px; color: #01579B; font-weight: 600; }
+
+  /* AI活用カード */
+  .use-grid { display: flex; flex-direction: column; gap: 12px; }
+  .use-card {
+    display: flex; gap: 14px; align-items: flex-start;
+    background: #f5fbff;
+    border-radius: 14px;
+    padding: 14px 16px;
+    border: 1px solid #e1f5fe;
+  }
+  .use-icon {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: linear-gradient(135deg, #0288D1, #00BCD4);
+    color: white; font-size: 20px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .use-body { flex: 1; }
+  .use-title { font-size: 14px; font-weight: 700; color: #0277BD; margin-bottom: 3px; }
+  .use-desc { font-size: 12px; color: #555; line-height: 1.6; }
+  .use-result {
+    margin-top: 6px;
+    font-size: 12px; font-weight: 700; color: #0288D1;
+    background: rgba(2,136,209,0.08);
+    border-radius: 6px; padding: 3px 8px;
+    display: inline-block;
+  }
+
+  /* タイムライン */
+  .timeline { list-style: none; position: relative; padding-left: 28px; }
+  .timeline::before {
+    content: '';
+    position: absolute; left: 10px; top: 8px; bottom: 8px;
+    width: 2px; background: linear-gradient(to bottom, #0288D1, #00BCD4);
+    border-radius: 2px;
+  }
+  .timeline li {
+    position: relative; margin-bottom: 16px;
+    font-size: 13px; color: #333;
+  }
+  .timeline li:last-child { margin-bottom: 0; }
+  .timeline li::before {
+    content: '';
+    position: absolute; left: -23px; top: 5px;
+    width: 10px; height: 10px; border-radius: 50%;
+    background: #0288D1;
+    border: 2px solid white;
+    box-shadow: 0 0 0 2px #0288D1;
+  }
+  .timeline li strong { display: block; font-weight: 700; color: #01579B; margin-bottom: 2px; }
+
+  /* 会員紹介 */
+  .club-card {
+    background: linear-gradient(135deg, #01579B, #0288D1);
+    color: white;
+    border-radius: 18px;
+    padding: 24px 20px;
+    margin: 16px;
+  }
+  .club-card .club-label {
+    font-size: 11px; letter-spacing: 2px; opacity: 0.7; margin-bottom: 10px;
+  }
+  .club-card h3 { font-size: 18px; font-weight: 900; margin-bottom: 6px; }
+  .club-card .club-catch { font-size: 13px; opacity: 0.9; margin-bottom: 18px; line-height: 1.7; }
+  .club-row {
+    display: flex; gap: 8px;
+    margin-bottom: 8px; align-items: flex-start;
+  }
+  .club-row .dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: #00BCD4; flex-shrink: 0; margin-top: 7px;
+  }
+  .club-row p { font-size: 13px; opacity: 0.9; }
+  .club-note {
+    margin-top: 16px; padding-top: 14px;
+    border-top: 1px solid rgba(255,255,255,0.2);
+    font-size: 12px; opacity: 0.75; line-height: 1.7;
+  }
+
+  /* フッター */
+  .footer {
+    background: linear-gradient(135deg, #0277BD, #00BCD4);
+    color: white;
+    padding: 32px 24px;
+    text-align: center;
+    margin: 16px;
+    border-radius: 20px;
+  }
+  .footer p { font-size: 14px; opacity: 0.92; line-height: 1.9; margin-bottom: 4px; }
+  .footer .logo { font-size: 10px; letter-spacing: 4px; opacity: 0.5; margin-top: 20px; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- カバー -->
+  <div class="cover">
+    <div class="badge">📊 AI活用タイプ診断結果</div>
+    <span class="type-icon">⚡</span>
+    <p class="type-label">あなたのタイプは</p>
+    <h1>効率化マスター型</h1>
+    <span class="catch">「やることは明確なのに、時間が足りない」<br>そのモヤモヤ、AIで一気に解決できます</span>
+    <div class="logo">AI START CLUB</div>
+  </div>
+
+  <!-- タイプの特徴 -->
+  <div class="section">
+    <div class="sec-title">⚡ このタイプの特徴</div>
+    <ul class="check-list">
+      <li>
+        <span class="check">✓</span>
+        <span>「なんでこれ、手でやってるんだろう」と感じたことがある</span>
+      </li>
+      <li>
+        <span class="check">✓</span>
+        <span>繰り返し作業・メール・報告書に時間を取られている</span>
+      </li>
+      <li>
+        <span class="check">✓</span>
+        <span>やることは明確なのに、時間が常に足りない感覚がある</span>
+      </li>
+    </ul>
+    <div class="strength-banner">
+      <div class="label">💡 このタイプの強みポイント</div>
+      <p>課題がはっきりしているから、AIを使い始めると変化が一番速い。</p>
+    </div>
+  </div>
+
+  <!-- AIで解決できること -->
+  <div class="section">
+    <div class="sec-title">🚀 AIで解決できること</div>
+    <div class="use-grid">
+      <div class="use-card">
+        <div class="use-icon">📧</div>
+        <div class="use-body">
+          <div class="use-title">メール返信の自動化</div>
+          <div class="use-desc">受け取ったメールをAIに貼り付けるだけで、丁寧な返信文が完成。</div>
+          <span class="use-result">⏱ 1通5分 → 約1分に短縮</span>
+        </div>
+      </div>
+      <div class="use-card">
+        <div class="use-icon">📝</div>
+        <div class="use-body">
+          <div class="use-title">議事録・報告書の自動作成</div>
+          <div class="use-desc">会議メモや音声メモを貼り付けるだけで、整理された文書に変換。</div>
+          <span class="use-result">⏱ 30分作業 → 5分以下</span>
+        </div>
+      </div>
+      <div class="use-card">
+        <div class="use-icon">💡</div>
+        <div class="use-body">
+          <div class="use-title">資料・情報の要約</div>
+          <div class="use-desc">長いメール・資料・ニュースを3行サマリーに。上司への報告にもそのまま使える。</div>
+          <span class="use-result">📊 情報処理時間 60〜75%削減</span>
+        </div>
+      </div>
+      <div class="use-card">
+        <div class="use-icon">🔁</div>
+        <div class="use-body">
+          <div class="use-title">繰り返し作業のテンプレ化</div>
+          <div class="use-desc">毎回同じような文章・作業はAIにテンプレを作らせて再利用。次回からコピペするだけ。</div>
+          <span class="use-result">🔄 一度作ればずっと使える</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 変化のイメージ -->
+  <div class="section">
+    <div class="sec-title">📅 使い始めてからの変化イメージ</div>
+    <ul class="timeline">
+      <li>
+        <strong>1週目｜まず1つ試してみる</strong>
+        メールの返信文をAIに作らせてみる。「意外と使えるじゃん」となる。
+      </li>
+      <li>
+        <strong>2〜3週目｜繰り返す作業に使い始める</strong>
+        議事録・週報・報告書など、毎週やってる作業に適用。時間の余裕が生まれ始める。
+      </li>
+      <li>
+        <strong>1ヶ月後｜本来の仕事に集中できる</strong>
+        ルーティン作業の時間が大幅に減り、企画・提案・人との関係構築に時間を使えるようになる。
+      </li>
+      <li>
+        <strong>3ヶ月後｜「AI使える人」として評価される</strong>
+        チームの中でも差がつき始め、業務効率化の相談を受ける立場になることも。
+      </li>
+    </ul>
+  </div>
+
+  <!-- AI START CLUB紹介 -->
+  <div class="club-card">
+    <div class="club-label">📌 AI START CLUB について</div>
+    <h3>あなたの効率化を、<br>一緒に実現するプログラム</h3>
+    <p class="club-catch">「学んで終わり」にしない。実際に業務で使えるようになるまで、個別でサポートします。</p>
+    <div class="club-row"><span class="dot"></span><p><strong>毎週のAI活用ステップ動画</strong>｜忙しくても続けられる構成</p></div>
+    <div class="club-row"><span class="dot"></span><p><strong>個別チャットサポート（質問し放題）</strong>｜「このケースはどうする？」にすぐ答えます</p></div>
+    <div class="club-row"><span class="dot"></span><p><strong>専用コミュニティ</strong>｜同じ効率化マスター型の事例・実績が集まっています</p></div>
+    <p class="club-note">効率化マスター型は「課題が明確」なので、サポートの成果が出るのが特に速いタイプです。一緒に取り組みましょう。</p>
+  </div>
+
+  <!-- フッター -->
+  <div class="footer">
+    <p>もっと自分に合った活用法を知りたい方へ🙌<br>LINEからアンケートを回答してください！<br>あなたのタイプ別プレゼントが届きます😊</p>
+    <div class="logo">AI START CLUB</div>
+  </div>
+
+</div>
+</body>
+</html>
