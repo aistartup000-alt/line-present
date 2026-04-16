@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>スマホで今すぐ試せる！ChatGPTプロンプト10選 | AI START CLUB</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Hiragino Kaku Gothic Pro', 'Noto Sans JP', 'Yu Gothic', sans-serif;
+    background: #f0f7ff;
+    color: #1a1a2e;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+  .container { max-width: 680px; margin: 0 auto; padding: 0 0 40px; }
+
+  /* カバー */
+  .cover {
+    background: linear-gradient(135deg, #1565C0 0%, #29B6F6 100%);
+    color: white;
+    padding: 48px 24px 40px;
+    text-align: center;
+  }
+  .cover .badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.25);
+    border-radius: 20px;
+    padding: 5px 18px;
+    font-size: 12px;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+  }
+  .cover .emoji-big { font-size: 56px; display: block; margin-bottom: 16px; }
+  .cover h1 { font-size: 24px; font-weight: 900; line-height: 1.4; margin-bottom: 12px; }
+  .cover .sub { font-size: 14px; opacity: 0.9; line-height: 1.8; }
+  .cover .logo { font-size: 11px; letter-spacing: 3px; opacity: 0.6; margin-top: 24px; }
+
+  /* 使い方 */
+  .how-to {
+    background: white;
+    margin: 16px;
+    border-radius: 18px;
+    padding: 20px;
+    box-shadow: 0 2px 16px rgba(41,182,246,0.12);
+  }
+  .how-to .sec-title {
+    font-size: 13px; font-weight: 700; color: #1565C0;
+    margin-bottom: 16px; padding-bottom: 8px;
+    border-bottom: 2px solid #e3f2fd;
+  }
+  .step-row {
+    display: flex; gap: 12px; align-items: flex-start;
+    padding: 10px 0; border-bottom: 1px solid #e3f2fd;
+  }
+  .step-row:last-child { border-bottom: none; }
+  .step-num {
+    background: linear-gradient(135deg, #1565C0, #29B6F6);
+    color: white; width: 28px; height: 28px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 700; flex-shrink: 0; margin-top: 2px;
+  }
+  .step-body .t { font-size: 14px; font-weight: 700; }
+  .step-body .d { font-size: 12px; color: #666; }
+
+  /* セクション */
+  .section {
+    background: white; margin: 16px; border-radius: 18px;
+    padding: 20px; box-shadow: 0 2px 16px rgba(41,182,246,0.12);
+  }
+  .sec-title {
+    font-size: 13px; font-weight: 700; color: #1565C0;
+    margin-bottom: 16px; padding-bottom: 8px;
+    border-bottom: 2px solid #e3f2fd;
+  }
+
+  /* プロンプトカード */
+  .prompt-card { margin-bottom: 20px; }
+  .prompt-card:last-child { margin-bottom: 0; }
+  .prompt-header {
+    display: flex; align-items: center; gap: 10px; margin-bottom: 8px;
+  }
+  .prompt-no {
+    background: linear-gradient(135deg, #1565C0, #29B6F6);
+    color: white; width: 28px; height: 28px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700; flex-shrink: 0;
+  }
+  .prompt-title { font-size: 14px; font-weight: 700; }
+  .prompt-use {
+    font-size: 11px; color: #1565C0; background: #e3f2fd;
+    padding: 2px 10px; border-radius: 20px; margin-left: auto;
+    white-space: nowrap;
+  }
+  .prompt-box {
+    background: #f0f7ff;
+    border: 1.5px dashed #29B6F6;
+    border-radius: 12px;
+    padding: 14px;
+    font-size: 13px;
+    color: #1a1a2e;
+    line-height: 1.9;
+    white-space: pre-wrap;
+    word-break: break-all;
+  }
+  .copy-btn {
+    display: flex; align-items: center; justify-content: center;
+    gap: 6px;
+    background: #e3f2fd; color: #1565C0;
+    border: none; border-radius: 8px;
+    padding: 8px 16px; font-size: 13px; font-weight: 700;
+    cursor: pointer; margin-top: 8px; width: 100%;
+    transition: background 0.2s, color 0.2s;
+  }
+  .copy-btn:hover { background: #29B6F6; color: white; }
+  .copy-btn.copied { background: #e8f5e9; color: #2e7d32; }
+  .prompt-tip {
+    font-size: 12px; color: #888; margin-top: 6px; padding-left: 4px;
+  }
+
+  /* コツボックス */
+  .tip-box {
+    background: linear-gradient(135deg, rgba(21,101,192,0.06), rgba(41,182,246,0.06));
+    border: 1.5px solid #b3e5fc; border-radius: 16px;
+    padding: 18px; margin: 16px;
+  }
+  .tip-box .sec-title { color: #1565C0; }
+  .tip-row {
+    display: flex; gap: 10px; padding: 6px 0;
+    font-size: 13px; color: #333; align-items: flex-start;
+  }
+  .tip-icon {
+    background: #29B6F6; color: white;
+    width: 22px; height: 22px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700; flex-shrink: 0; margin-top: 2px;
+  }
+
+  /* フッター */
+  .footer {
+    background: linear-gradient(135deg, #1565C0, #29B6F6);
+    color: white; padding: 28px 24px;
+    text-align: center; margin: 16px; border-radius: 18px;
+  }
+  .footer p { font-size: 13px; opacity: 0.9; margin-bottom: 8px; line-height: 1.9; }
+  .footer .cta {
+    display: inline-block;
+    background: #FFD600; color: #1a1a2e;
+    font-weight: 900; font-size: 15px;
+    padding: 14px 32px; border-radius: 30px; margin-top: 10px;
+  }
+  .footer .logo { font-size: 11px; letter-spacing: 3px; opacity: 0.5; margin-top: 20px; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="cover">
+  <span class="emoji-big">📱</span>
+  <span class="badge">🎁 LINE登録ありがとうございます</span>
+  <h1>スマホで今すぐ試せる！<br>ChatGPTプロンプト10選</h1>
+  <p class="sub">コピペするだけ。今日から使えます。<br>赤文字の部分だけ書き換えてください。</p>
+  <div class="logo">AI START CLUB</div>
+</div>
+
+<div class="how-to">
+  <div class="sec-title">📲 スマホでの使い方（30秒で準備完了）</div>
+  <div class="step-row">
+    <div class="step-num">1</div>
+    <div class="step-body">
+      <div class="t">このページを開いたまま別タブを開く</div>
+      <div class="d">ブラウザの「＋」ボタンで新しいタブを開こう</div>
+    </div>
+  </div>
+  <div class="step-row">
+    <div class="step-num">2</div>
+    <div class="step-body">
+      <div class="t">ChatGPT または Gemini を開く</div>
+      <div class="d">どちらも無料版でOK。アプリでもブラウザでも使えます</div>
+    </div>
+  </div>
+  <div class="step-row">
+    <div class="step-num">3</div>
+    <div class="step-body">
+      <div class="t">「コピーする」ボタンを押して貼り付けて送信</div>
+      <div class="d">★印の部分だけ自分の情報に書き換えるとさらに精度が上がります</div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="sec-title">💼 仕事・日常で使えるプロンプト</div>
+
+  <div class="prompt-card">
+    <div class="prompt-header">
+      <div class="prompt-no">1</div>
+      <div class="prompt-title">メール返信文を作る</div>
+      <div class="prompt-use">仕事・日常</div>
+    </div>
+    <div class="prompt-box" id="p1">あなたは丁寧なビジネスメールの作成を得意とするライターです。
+
+以下の条件で返信メールを作成してください。
+
+【受け取ったメール】
+山田様
+
+お世話になっております。
+先日ご提案いただいた件について、来週月曜日にご確認いただけますでしょうか。
+ご都合をお知らせください。
+
+株式会社〇〇 佐藤
+
+【条件】
+・送る相手：取引先の担当者 ★
+・トーン：丁寧・フォーマル ★
+・伝えたいこと：来週月曜日は対応可能。午後2時以降であれば空いている ★
+・文字数：150字前後</div>
+    <button class="copy-btn" onclick="copyText('p1', this)">📋 コピーする</button>
+    <div class="prompt-tip">★印の部分を自分の状況に書き換えると精度が上がります</div>
+  </div>
+
+  <div class="prompt-card">
+    <div class="prompt-header">
+      <div class="prompt-no">2</div>
+      <div class="prompt-title">長い文章・資料を要約する</div>
+      <div class="prompt-use">仕事・日常</div>
+    </div>
+    <div class="prompt-box" id="p2">あなたは情報整理の専門家です。
+
+以下の文章を読んで要約してください。
+
+【文章】
+生成AIとは、テキスト・画像・音声・動画などのコンテンツを自律的に生成できる人工知能の総称です。大量のデータを学習し、ユーザーの指示（プロンプト）に応じて新しいコンテンツを作り出します。代表的なサービスにはChatGPT、Claude、Gemini、Midjourneyなどがあります。ビジネスでは文書作成・要約・翻訳・コード生成などに活用され、生産性向上に大きく貢献しています。一方で著作権・プライバシー・誤情報のリスクも指摘されており、適切な利用ルールの整備が求められています。★
+
+【要約の条件】
+・読む人：上司への報告用 ★
+・形式：3行サマリー＋重要ポイントを箇条書き4個
+・省いていい情報：挨拶・前置きは省く。数字・固有名詞は残す</div>
+    <button class="copy-btn" onclick="copyText('p2', this)">📋 コピーする</button>
+    <div class="prompt-tip">★の文章部分を要約したい内容に貼り替えるだけでOK</div>
+  </div>
+
+  <div class="prompt-card">
+    <div class="prompt-header">
+      <div class="prompt-no">3</div>
+      <div class="prompt-title">アイデアをたくさん出してもらう</div>
+      <div class="prompt-use">仕事・企画</div>
+    </div>
+    <div class="prompt-box" id="p3">あなたは創造的なブレインストーミングの専門家です。
+
+以下のテーマについてアイデアを出してください。
+
+【テーマ】
+会社の朝礼を短く・有意義にする方法 ★
+
+【私の状況】
+・立場：会社員（チームリーダー）★
+・職場の人数：10名程度 ★
+・使えるリソース：スマホ・パソコン・週5分の朝の時間 ★
+
+【出力条件】
+・アイデアを10個
+・今日から実践できるものを優先
+・各アイデアに「なぜ効果的か」を一言添える</div>
+    <button class="copy-btn" onclick="copyText('p3', this)">📋 コピーする</button>
+    <div class="prompt-tip">★の部分を自分のテーマ・状況に変えると現実的な案が出ます</div>
+  </div>
+
+  <div class="prompt-card">
+    <div class="prompt-header">
+      <div class="prompt-no">4</div>
+      <div class="prompt-title">文章を読みやすく直してもらう</div>
+      <div class="prompt-use">仕事・日常</div>
+    </div>
+    <div class="prompt-box" id="p4">あなたは日本語の文章校正・編集のプロです。
+
+以下の文章を改善してください。
+
+【元の文章】
+本日はお忙しい中お時間をいただきありがとうございます。先日の件について確認したいことがあってご連絡させていただきました。もし可能であれば来週のどこかでお時間をいただけると大変助かります。よろしくお願いいたします。★
+
+【改善の条件】
+・意味・内容は変えない
+・読む人：取引先のお客様 ★
+・直してほしい点：冗長な表現を削ってテンポよくする ★
+・文体：丁寧なです・ます調を維持
+
+改善前と改善後を並べて見せてください。</div>
+    <button class="copy-btn" onclick="copyText('p4', this)">📋 コピーする</button>
+    <div class="prompt-tip">★の文章を自分の文章に貼り替えるだけ。「並べて見せて」で違いが一目瞭然</div>
+  </div>
+
+  <div class="prompt-card">
+    <div class="prompt-header">
+      <div class="prompt-no">5</div>
+      <div class="prompt-title">悩みを相談して解決策をもらう</div>
+      <div class="prompt-use">仕事・キャリア</div>
+    </div>
+    <div class="prompt-box" id="p5">あなたは親身になって相談に乗ってくれるキャリア・ライフアドバイザーです。
+
+以下の状況について相談に乗ってください。
+
+【私の状況】
+・職業・立場：会社員5年目・営業職 ★
+・悩みの内容：毎日残業が2〜3時間あり、プライベートの時間が取れない ★
+・すでに試したこと：タスク管理アプリを使ったが続かなかった ★
+・理想の状態：定時に上がって、週に2〜3日は自分の時間を確保したい ★
+
+【お願い】
+・解決策を具体的に3つ提案してください
+・それぞれ「なぜ効果があるか」の理由も添えてください
+・今日から実践できる内容にしてください</div>
+    <button class="copy-btn" onclick="copyText('p5', this)">📋 コピーする</button>
+    <div class="prompt-tip">「すでに試したこと」を書くと的外れな提案が来なくなります</div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="sec-title">✨ もっと活用できるプロンプト</div>
+
+  <div class="prompt-card">
+    <div class="prompt-header">
+      <div class="prompt-no">6</div>
+      <div class="prompt-title">SNS投稿文を作る</div>
+      <div class="prompt-use">副業・発信</div>
+    </div>
+    <div class="prompt-box" id="p6">あなたはSNSマーケティングの専門家で、フォロワーに刺さる投稿文を作るのが得意です。
+
+以下の条件でX（旧Twitter）の投稿文を作成してください。
+
+【投稿するテーマ】
+ChatGPTを使ってメールの返信時間が1通5分から1分に短縮できた体験談 ★
+
+【発信者の情報】
+・発信ジャンル：AI活用・仕事効率化 ★
+・フォロワーのイメージ：会社員・20〜40代・AIに興味はあるが使いこなせていない ★
+・普段の文体：親しみやすいカジュアルな口調 ★
+
+【出力条件】
+・3パターン作成（インパクト重視 / 共感重視 / 情報重視）
+・各140字以内
+・改行を使って読みやすくする</div>
+    <button class="copy-btn" onclick="copyText('p6', this)">📋 コピーする</button>
+    <div class="prompt-tip">「誰に向けた投稿か」を書くほど刺さる言葉を選んでくれます</div>
+  </div>
+
+  <div class="prompt-card">
+    <div class="prompt-header">
+      <div class="prompt-no">7</div>
+      <div class="prompt-title">難しい内容をわかりやすく説明してもらう</div>
+      <div class="prompt-use">学習・説明</div>
+    </div>
+    <div class="prompt-box" id="p7">あなたはどんな難しいことでも、誰にでもわかるように説明できる教育の専門家です。
+
+以下の内容をわかりやすく説明してください。
+
+【説明してほしいこと】
+「生成AI」とは何か ★
+
+【説明の条件】
+・説明する相手：AIを全く知らない50代の親 ★
+・説明の長さ：3〜4文程度
+・身近な例えを1つ使う（スマホ・料理・テレビなど日常のもので例える）
+・専門用語が出てきたらその場で補足する
+
+最後に「つまり一言でいうと〇〇」でまとめてください。</div>
+    <button class="copy-btn" onclick="copyText('p7', this)">📋 コピーする</button>
+    <div class="prompt-tip">「誰に説明するか」を変えると言葉の難易度が変わります</div>
+  </div>
+
+  <div class="prompt-card">
+    <div class="prompt-header">
+      <div class="prompt-no">8</div>
+      <div class="prompt-title">プレゼンや資料の構成を作る</div>
+      <div class="prompt-use">仕事・企画</div>
+    </div>
+    <div class="prompt-box" id="p8">あなたはプレゼンテーションの構成づくりが得意なコンサルタントです。
+
+以下の条件でプレゼン構成を提案してください。
+
+【プレゼンのテーマ】
+社内でのChatGPT活用を上司に提案したい ★
+
+【状況】
+・発表相手：部長・役員（IT知識はそれほど高くない）★
+・発表時間：10分 ★
+・目的：ChatGPT導入の承認をもらいたい ★
+・懸念されそうなこと：セキュリティリスク・コスト・使いこなせるか不安 ★
+
+【出力条件】
+・スライドタイトルと各スライドの要点を6枚分
+・最初に「このプレゼンで伝えるべき一番重要なメッセージ」を1行で示す
+・各スライドに「何を話すか」の一言メモを添える</div>
+    <button class="copy-btn" onclick="copyText('p8', this)">📋 コピーする</button>
+    <div class="prompt-tip">「懸念されそうなこと」を入れると反論への備えも考えてくれます</div>
+  </div>
+
+  <div class="prompt-card">
+    <div class="prompt-header">
+      <div class="prompt-no">9</div>
+      <div class="prompt-title">今日の食事・献立を提案してもらう</div>
+      <div class="prompt-use">日常生活</div>
+    </div>
+    <div class="prompt-box" id="p9">あなたは家庭料理が得意な料理研究家です。
+
+以下の条件で今日の夕食メニューを提案してください。
+
+【冷蔵庫・家にある食材】
+鶏もも肉・玉ねぎ・卵・豆腐・醤油・みりん・ごま油・にんにく ★
+
+【条件】
+・料理にかけられる時間：20分以内 ★
+・人数：大人2人 ★
+・食べる人の好み・制限：辛いものが少し苦手。野菜を増やしたい ★
+
+【出力条件】
+・メニューを2案
+・各メニューに簡単な手順（4〜5ステップ）を添える
+・買い足しが必要な食材があれば教える</div>
+    <button class="copy-btn" onclick="copyText('p9', this)">📋 コピーする</button>
+    <div class="prompt-tip">冷蔵庫の中身を見ながら食材を打ち込むだけで使えます</div>
+  </div>
+
+  <div class="prompt-card">
+    <div class="prompt-header">
+      <div class="prompt-no">10</div>
+      <div class="prompt-title">自分の強みを言語化してもらう</div>
+      <div class="prompt-use">キャリア・副業</div>
+    </div>
+    <div class="prompt-box" id="p10">あなたはキャリアカウンセラーであり、人の強みを引き出すのが得意です。
+
+以下の情報をもとに、私の強みを分析してください。
+
+【私のこと】
+・職業・業種：営業職5年目・IT系企業 ★
+・得意なこと・褒められること：人の話を最後まで聞く・相手が何を求めているか察するのが早い ★
+・好きなこと・熱中できること：情報収集・新しいツールを試すこと・人に教えること ★
+・これまでの経験：新規顧客の開拓プロジェクトでチームをまとめて目標達成できた ★
+
+【お願い】
+・強みを3つ、「〇〇力」という言葉で表現してください
+・それぞれ「なぜそれが強みといえるか」の根拠を添えてください
+・転職・副業・社内での評価アップに活かせる場面も教えてください</div>
+    <button class="copy-btn" onclick="copyText('p10', this)">📋 コピーする</button>
+    <div class="prompt-tip">情報を多く書くほど「自分だけの強み」として言語化してくれます</div>
+  </div>
+</div>
+
+<div class="tip-box">
+  <div class="sec-title">💡 もっと使いこなすコツ</div>
+  <div class="tip-row">
+    <div class="tip-icon">1</div>
+    <div>★印の部分だけ書き換えればOK。まずそのままコピペして試してみよう</div>
+  </div>
+  <div class="tip-row">
+    <div class="tip-icon">2</div>
+    <div>最初の回答が微妙でも「もっと短く」「もっとカジュアルに」と追加で指示できる</div>
+  </div>
+  <div class="tip-row">
+    <div class="tip-icon">3</div>
+    <div>条件を増やすほど精度が上がる。慣れてきたら「読む人」「目的」「制約」を足してみよう</div>
+  </div>
+</div>
+
+<div class="footer">
+  <p>もっと自分に合った使い方を知りたい方へ🙌<br>簡単なアンケートに答えると<br>あなたのタイプ別プレゼントが届きます😊</p>
+  <span class="cta">アンケートに答える →</span>
+  <div class="logo">AI START CLUB</div>
+</div>
+
+</div>
+<script>
+function copyText(id, btn) {
+  const text = document.getElementById(id).innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = '✅ コピーしました！';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = '📋 コピーする';
+      btn.classList.remove('copied');
+    }, 2000);
+  });
+}
+</script>
+</body>
+</html>
