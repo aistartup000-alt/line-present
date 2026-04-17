@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIスタートクラブとは｜山梨発・AIを一から学べるコミュニティ</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Hiragino Kaku Gothic Pro', 'Noto Sans JP', 'Yu Gothic', sans-serif;
+    background: #0d0d1a;
+    color: #e8e8f0;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+  .container { max-width: 680px; margin: 0 auto; padding: 0 0 60px; }
+
+  /* ===== SLIDE 1: カバー ===== */
+  .slide-cover {
+    background: linear-gradient(160deg, #0d0d1a 0%, #0f1535 60%, #0a1628 100%);
+    padding: 56px 24px 48px;
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 3px solid #29B6F6;
+  }
+  .slide-cover::before {
+    content: '';
+    position: absolute; top: -60px; right: -60px;
+    width: 260px; height: 260px; border-radius: 50%;
+    border: 2px solid rgba(41,182,246,0.2);
+  }
+  .slide-cover::after {
+    content: '';
+    position: absolute; top: 10px; right: 10px;
+    width: 180px; height: 180px; border-radius: 50%;
+    border: 2px solid rgba(105,240,174,0.15);
+  }
+  .cover-eyebrow {
+    font-size: 13px; color: #9e9eb8;
+    margin-bottom: 20px; letter-spacing: 0.5px;
+  }
+  .cover-bar {
+    display: flex; align-items: stretch; gap: 0;
+    margin-bottom: 28px;
+  }
+  .cover-line {
+    width: 4px; border-radius: 2px;
+    background: linear-gradient(to bottom, #29B6F6, #69F0AE);
+    flex-shrink: 0; margin-right: 20px;
+  }
+  .cover-titles { flex: 1; }
+  .cover-h1 {
+    font-size: 13px; color: #9e9eb8;
+    margin-bottom: 10px; letter-spacing: 0.5px;
+  }
+  .cover-main {
+    font-size: 40px; font-weight: 900; color: #ffffff;
+    line-height: 1.15; letter-spacing: -0.5px;
+    margin-bottom: 16px;
+  }
+  .cover-sub {
+    font-size: 15px; color: #29B6F6; font-weight: 600;
+  }
+  .cover-meta {
+    font-size: 12px; color: rgba(255,255,255,0.3);
+    letter-spacing: 2px; margin-top: 32px;
+  }
+
+  /* ===== スライド共通ヘッダー ===== */
+  .slide {
+    padding: 36px 24px 32px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    position: relative;
+  }
+  .slide-title {
+    font-size: 22px; font-weight: 900; color: #ffffff;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid rgba(41,182,246,0.25);
+  }
+  .slide-note {
+    font-size: 12px; color: rgba(255,255,255,0.4);
+    margin-top: 16px;
+  }
+
+  /* ===== SLIDE 2: AIスタートクラブとは ===== */
+  .about-catch {
+    background: rgba(41,182,246,0.08);
+    border: 1.5px solid rgba(41,182,246,0.35);
+    border-radius: 10px;
+    padding: 16px 20px;
+    text-align: center;
+    font-size: 18px; font-weight: 700; color: #29B6F6;
+    margin-bottom: 18px;
+  }
+  .about-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 10px; margin-bottom: 16px;
+  }
+  .about-cell {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px; padding: 14px 12px; text-align: center;
+  }
+  .about-cell-label {
+    font-size: 12px; font-weight: 700; color: #29B6F6;
+    margin-bottom: 8px; letter-spacing: 1px;
+  }
+  .about-cell-val {
+    font-size: 13px; color: rgba(255,255,255,0.8); line-height: 1.5;
+  }
+
+  /* ===== SLIDE 3: こんな方へ ===== */
+  .for-list { display: flex; flex-direction: column; gap: 10px; }
+  .for-item {
+    display: flex; align-items: flex-start; gap: 14px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 10px; padding: 14px 16px;
+  }
+  .for-num {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: #29B6F6;
+    color: #0d0d1a; font-size: 14px; font-weight: 900;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .for-text { font-size: 14px; color: rgba(255,255,255,0.85); padding-top: 5px; }
+
+  /* ===== SLIDE 4: 3つの特長 ===== */
+  .features { display: flex; flex-direction: column; gap: 12px; }
+  .feature-card {
+    background: rgba(255,255,255,0.04);
+    border: 1.5px solid rgba(41,182,246,0.2);
+    border-radius: 14px; overflow: hidden;
+  }
+  .feature-card.green { border-color: rgba(105,240,174,0.3); }
+  .feature-num {
+    font-size: 40px; font-weight: 900; color: #29B6F6;
+    padding: 20px 20px 4px;
+  }
+  .feature-card.green .feature-num { color: #69F0AE; }
+  .feature-title {
+    font-size: 16px; font-weight: 700; color: #ffffff;
+    padding: 0 20px 10px; border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .feature-desc {
+    font-size: 13px; color: rgba(255,255,255,0.6);
+    padding: 12px 20px 18px; line-height: 1.8;
+  }
+
+  /* ===== SLIDE 5: 学べる内容 ===== */
+  .stages { display: flex; flex-direction: column; gap: 10px; }
+  .stage-row {
+    display: flex; align-items: stretch; gap: 0;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 10px; overflow: hidden;
+  }
+  .stage-bar {
+    width: 4px; flex-shrink: 0;
+  }
+  .s1 .stage-bar { background: #29B6F6; }
+  .s2 .stage-bar { background: #69F0AE; }
+  .s3 .stage-bar { background: #69F0AE; }
+  .s4 .stage-bar { background: #29B6F6; }
+  .stage-inner { padding: 14px 16px; flex: 1; }
+  .stage-label {
+    font-size: 11px; font-weight: 700; letter-spacing: 2px;
+    margin-bottom: 4px;
+  }
+  .s1 .stage-label { color: #29B6F6; }
+  .s2 .stage-label { color: #69F0AE; }
+  .s3 .stage-label { color: #69F0AE; }
+  .s4 .stage-label { color: #29B6F6; }
+  .stage-name {
+    font-size: 15px; font-weight: 700; color: #ffffff;
+    margin-bottom: 3px;
+  }
+  .stage-desc { font-size: 12px; color: rgba(255,255,255,0.5); line-height: 1.6; }
+
+  /* ===== SLIDE 6: 大切にしていること ===== */
+  .philosophy-box {
+    background: rgba(255,255,255,0.05);
+    border: 1.5px solid rgba(41,182,246,0.2);
+    border-radius: 10px; padding: 16px 18px;
+    text-align: center; font-size: 14px;
+    color: rgba(255,255,255,0.8); line-height: 1.8;
+    margin-bottom: 20px;
+  }
+  .steps-row {
+    display: grid; grid-template-columns: 1fr auto 1fr auto 1fr;
+    gap: 8px; align-items: center;
+  }
+  .step-card {
+    background: rgba(255,255,255,0.04);
+    border: 1.5px solid rgba(41,182,246,0.25);
+    border-radius: 10px; padding: 16px 12px; text-align: center;
+  }
+  .step-label {
+    font-size: 12px; font-weight: 700; color: #29B6F6;
+    margin-bottom: 8px; letter-spacing: 1px;
+  }
+  .step-card:nth-child(3) { border-color: rgba(105,240,174,0.3); }
+  .step-card:nth-child(3) .step-label { color: #69F0AE; }
+  .step-card:nth-child(5) { border-color: rgba(41,182,246,0.25); }
+  .step-text { font-size: 13px; color: rgba(255,255,255,0.8); line-height: 1.5; }
+  .step-arrow { font-size: 18px; color: rgba(255,255,255,0.25); text-align: center; }
+
+  /* ===== SLIDE 7: クロージング ===== */
+  .slide-closing {
+    padding: 52px 24px 56px;
+    text-align: center;
+    background: linear-gradient(160deg, #0d0d1a 0%, #0f1535 100%);
+    position: relative; overflow: hidden;
+  }
+  .closing-circle1 {
+    position: absolute; top: -40px; right: -60px;
+    width: 240px; height: 240px; border-radius: 50%;
+    border: 2px solid rgba(41,182,246,0.15);
+    pointer-events: none;
+  }
+  .closing-circle2 {
+    position: absolute; bottom: -60px; left: -40px;
+    width: 200px; height: 200px; border-radius: 50%;
+    border: 2px solid rgba(105,240,174,0.12);
+    pointer-events: none;
+  }
+  .closing-eyebrow {
+    font-size: 14px; color: rgba(255,255,255,0.45);
+    margin-bottom: 20px;
+  }
+  .closing-main {
+    font-size: 34px; font-weight: 900; color: #ffffff;
+    line-height: 1.3; margin-bottom: 28px;
+    text-shadow: 0 0 40px rgba(41,182,246,0.25);
+  }
+  .closing-btn {
+    display: inline-block;
+    background: #29B6F6;
+    color: #0d0d1a; font-size: 18px; font-weight: 900;
+    padding: 16px 40px; border-radius: 6px;
+    margin-bottom: 24px; letter-spacing: 0.5px;
+  }
+  .closing-sub {
+    font-size: 15px; color: #69F0AE; font-weight: 600;
+    margin-bottom: 32px;
+  }
+  .closing-meta {
+    font-size: 11px; color: rgba(255,255,255,0.2);
+    letter-spacing: 3px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- SLIDE 1: カバー -->
+  <div class="slide-cover">
+    <p class="cover-eyebrow">AIって、何から始めればいい？</p>
+    <div class="cover-bar">
+      <div class="cover-line"></div>
+      <div class="cover-titles">
+        <div class="cover-main">AIスタートクラブ</div>
+        <div class="cover-sub">山梨発｜AIを一から一緒に学べるコミュニティ</div>
+      </div>
+    </div>
+    <p class="cover-meta">2026年スタート &nbsp;|&nbsp; オンライン・オフライン対応</p>
+  </div>
+
+  <!-- SLIDE 2: AIスタートクラブとは -->
+  <div class="slide">
+    <div class="slide-title">AIスタートクラブとは</div>
+    <div class="about-catch">「AIを一から一緒に学べる場所」</div>
+    <div class="about-grid">
+      <div class="about-cell">
+        <div class="about-cell-label">対象AI</div>
+        <div class="about-cell-val">ChatGPT / Gemini /<br>Claude</div>
+      </div>
+      <div class="about-cell">
+        <div class="about-cell-label">拠点</div>
+        <div class="about-cell-val">山梨県<br>（全国オンライン対応）</div>
+      </div>
+      <div class="about-cell">
+        <div class="about-cell-label">開始</div>
+        <div class="about-cell-val">2026年スタート</div>
+      </div>
+    </div>
+    <p class="slide-note">名前は聞いたことあるけど、どう使えばいいかわからない方のための場所です。</p>
+  </div>
+
+  <!-- SLIDE 3: こんな方に向けています -->
+  <div class="slide">
+    <div class="slide-title">こんな方に向けています</div>
+    <div class="for-list">
+      <div class="for-item">
+        <div class="for-num">1</div>
+        <div class="for-text">仕事でAIが必要になったが、社内に教えてくれる人がいない</div>
+      </div>
+      <div class="for-item">
+        <div class="for-num">2</div>
+        <div class="for-text">ChatGPTを試したけど、うまく使えなくて止まってしまった</div>
+      </div>
+      <div class="for-item">
+        <div class="for-num">3</div>
+        <div class="for-text">副業・情報発信にAIを活用したいが、何から手をつければいいかわからない</div>
+      </div>
+      <div class="for-item">
+        <div class="for-num">4</div>
+        <div class="for-text">転職・キャリアアップのために、AIスキルを身につけておきたい</div>
+      </div>
+    </div>
+    <p class="slide-note">地域は山梨県内を中心に。オンライン参加も可能なので、場所を問わず学べます。</p>
+  </div>
+
+  <!-- SLIDE 4: 3つの特長 -->
+  <div class="slide">
+    <div class="slide-title">AIスタートクラブの3つの特長</div>
+    <div class="features">
+      <div class="feature-card">
+        <div class="feature-num">01</div>
+        <div class="feature-title">地域密着・顔が見える安心感</div>
+        <div class="feature-desc">山梨・甲府を中心に、同じ地域に仲間がいる安心感が継続力につながります。</div>
+      </div>
+      <div class="feature-card green">
+        <div class="feature-num">02</div>
+        <div class="feature-title">オンライン × オフラインで学べる</div>
+        <div class="feature-desc">動画・資料はいつでも確認。チャットで質問、定期的な対面交流で孤立しません。</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-num">03</div>
+        <div class="feature-title">地方にいながら最新情報にアクセス</div>
+        <div class="feature-desc">東京の現場情報・最新トレンドをタイムリーに共有。「情報が遅い」はありません。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 5: 学べる内容 -->
+  <div class="slide">
+    <div class="slide-title">学べる内容</div>
+    <div class="stages">
+      <div class="stage-row s1">
+        <div class="stage-bar"></div>
+        <div class="stage-inner">
+          <div class="stage-label">STAGE 1</div>
+          <div class="stage-name">AIの基礎と体験</div>
+          <div class="stage-desc">ChatGPT・Geminiが何者かを理解し、スマホ1台から実際に触ってみる</div>
+        </div>
+      </div>
+      <div class="stage-row s2">
+        <div class="stage-bar"></div>
+        <div class="stage-inner">
+          <div class="stage-label">STAGE 2</div>
+          <div class="stage-name">プロンプト活用・業務活用</div>
+          <div class="stage-desc">メール作成、資料要約、SNS投稿文…伝え方の型を学んで即実践</div>
+        </div>
+      </div>
+      <div class="stage-row s3">
+        <div class="stage-bar"></div>
+        <div class="stage-inner">
+          <div class="stage-label">STAGE 3</div>
+          <div class="stage-name">発信・副業・キャリア活用</div>
+          <div class="stage-desc">情報発信の仕組み作り、副業の最初の一歩を踏み出すサポート</div>
+        </div>
+      </div>
+      <div class="stage-row s4">
+        <div class="stage-bar"></div>
+        <div class="stage-inner">
+          <div class="stage-label">STAGE 4</div>
+          <div class="stage-name">業務自動化・ノーコード</div>
+          <div class="stage-desc">n8n（エヌエイトエヌ）・Dify（ディフィー）などの活用で業務を自動化</div>
+        </div>
+      </div>
+    </div>
+    <p class="slide-note">※ 段階的に積み上げる形式。自分のペースで進められます。</p>
+  </div>
+
+  <!-- SLIDE 6: 大切にしていること -->
+  <div class="slide">
+    <div class="slide-title">AIスタートクラブが大切にしていること</div>
+    <div class="philosophy-box">
+      高額スクール・よくわからない助成金ビジネスには流されない。<br>
+      まず「理解する」を最優先にしています。
+    </div>
+    <div class="steps-row">
+      <div class="step-card">
+        <div class="step-label">Step 1</div>
+        <div class="step-text">AIが何者かを理解する</div>
+      </div>
+      <div class="step-arrow">→</div>
+      <div class="step-card">
+        <div class="step-label">Step 2</div>
+        <div class="step-text">安全な使い方と適切な距離感を知る</div>
+      </div>
+      <div class="step-arrow">→</div>
+      <div class="step-card">
+        <div class="step-label">Step 3</div>
+        <div class="step-text">自分で体験して自分の使い方を見つける</div>
+      </div>
+    </div>
+    <p class="slide-note">最初はわからなくて当然。一人で試していると迷いやすいのも当然。だから一緒にやりましょう。</p>
+  </div>
+
+  <!-- SLIDE 7: クロージング -->
+  <div class="slide-closing">
+    <div class="closing-circle1"></div>
+    <div class="closing-circle2"></div>
+    <p class="closing-eyebrow">AIを学ぶのに、遅すぎることはありません。</p>
+    <div class="closing-main">今日が、最初の一歩です。</div>
+    <div class="closing-btn">一緒に始めてみませんか？</div>
+    <p class="closing-sub">AIスタートクラブで、お待ちしています。</p>
+    <p class="closing-meta">山梨発 × AIコミュニティ &nbsp;|&nbsp; 2026</p>
+  </div>
+
+</div>
+</body>
+</html>

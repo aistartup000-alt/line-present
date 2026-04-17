@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ChatGPT・Claude・Gemini どれを使えばいい？｜AI START CLUB</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Hiragino Kaku Gothic Pro', 'Noto Sans JP', 'Yu Gothic', sans-serif;
+    background: #f0f2ff;
+    color: #1a1a2e;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+  .container { max-width: 680px; margin: 0 auto; padding: 0 0 60px; }
+
+  /* ===== 共通スライドブロック ===== */
+  .slide {
+    background: white;
+    margin: 16px;
+    border-radius: 20px;
+    padding: 28px 20px;
+    box-shadow: 0 2px 16px rgba(100,120,200,0.08);
+  }
+  .slide-title {
+    font-size: 20px; font-weight: 900; color: #1a1a2e;
+    margin-bottom: 22px; line-height: 1.4;
+  }
+  .slide-note {
+    font-size: 13px; color: #666;
+    margin-top: 16px; text-align: center;
+  }
+
+  /* ===== SLIDE 1: カバー ===== */
+  .slide-cover {
+    background: linear-gradient(160deg, #eef0ff 0%, #f0f2ff 100%);
+    margin: 0; border-radius: 0;
+    padding: 40px 24px 36px;
+    text-align: center;
+    box-shadow: none;
+  }
+  .cover-badge {
+    display: inline-block;
+    background: white;
+    border: 1.5px solid #c5c8e8;
+    border-radius: 24px;
+    padding: 6px 20px;
+    font-size: 13px; font-weight: 600; color: #444;
+    margin-bottom: 20px;
+  }
+  .cover-h1 {
+    font-size: 22px; font-weight: 900; color: #1a1a2e;
+    line-height: 1.45; margin-bottom: 8px;
+  }
+  .cover-sub {
+    font-size: 17px; font-weight: 900; color: #1a1a2e;
+    margin-bottom: 28px;
+  }
+  .cover-chars {
+    display: flex; justify-content: center; align-items: flex-end;
+    gap: 8px; margin-bottom: 8px;
+  }
+  .char-icon { font-size: 52px; line-height: 1; }
+  .char-icon.mid { font-size: 60px; }
+  .cover-credit { font-size: 11px; color: #aaa; margin-top: 16px; }
+
+  /* ===== SLIDE 2: 得意技が違う相棒 ===== */
+  .partner-grid {
+    display: grid; grid-template-columns: repeat(3,1fr);
+    gap: 12px;
+  }
+  .partner-card { text-align: center; }
+  .partner-badge {
+    display: inline-block;
+    border-radius: 20px; padding: 5px 14px;
+    font-size: 13px; font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .partner-badge.gpt { background: #d4f5ec; color: #087f5b; }
+  .partner-badge.claude { background: #fef3d4; color: #92400e; }
+  .partner-badge.gemini { background: #dbeafe; color: #1e40af; }
+  .partner-char { font-size: 48px; display: block; margin-bottom: 8px; }
+  .partner-note {
+    background: #f8f9ff;
+    border-radius: 10px; padding: 10px 12px;
+    font-size: 13px; font-weight: 600; color: #444;
+    margin-top: 8px; line-height: 1.5;
+  }
+  .slide2-footer {
+    background: #f0f2ff; border-radius: 12px;
+    padding: 12px 16px; margin-top: 16px;
+    text-align: center; font-size: 14px; font-weight: 700; color: #3730a3;
+  }
+
+  /* ===== SLIDE 3: 3つのAI徹底比較 ===== */
+  .compare-grid { display: flex; flex-direction: column; gap: 14px; }
+  .compare-card {
+    border-radius: 16px; overflow: hidden;
+    border: 2px solid;
+  }
+  .compare-card.gpt { border-color: #10A37F; }
+  .compare-card.claude { border-color: #D97706; }
+  .compare-card.gemini { border-color: #4285F4; }
+
+  .compare-head {
+    padding: 16px 18px 12px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .compare-card.gpt .compare-head { background: #f0fdf8; }
+  .compare-card.claude .compare-head { background: #fffbf0; }
+  .compare-card.gemini .compare-head { background: #eff6ff; }
+
+  .compare-emoji { font-size: 36px; flex-shrink: 0; }
+  .compare-nameblock { flex: 1; }
+  .compare-name {
+    font-size: 16px; font-weight: 900; color: #1a1a2e;
+    margin-bottom: 2px;
+  }
+  .compare-catch { font-size: 13px; font-weight: 700; }
+  .compare-card.gpt .compare-catch { color: #10A37F; }
+  .compare-card.claude .compare-catch { color: #D97706; }
+  .compare-card.gemini .compare-catch { color: #4285F4; }
+
+  .compare-body { padding: 12px 18px 4px; }
+  .compare-feat {
+    display: flex; gap: 8px; align-items: flex-start;
+    font-size: 13px; color: #444; padding: 5px 0;
+    border-bottom: 1px solid #f5f5f5;
+  }
+  .compare-feat:last-of-type { border-bottom: none; }
+  .feat-check { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+  .compare-card.gpt .feat-check { color: #10A37F; }
+  .compare-card.claude .feat-check { color: #D97706; }
+  .compare-card.gemini .feat-check { color: #4285F4; }
+
+  .compare-rec {
+    margin: 10px 18px 16px;
+    border-radius: 8px; padding: 8px 14px;
+    font-size: 12px; font-weight: 700; text-align: center;
+    color: white;
+  }
+  .compare-card.gpt .compare-rec { background: #10A37F; }
+  .compare-card.claude .compare-rec { background: #D97706; }
+  .compare-card.gemini .compare-rec { background: #4285F4; }
+
+  /* ===== SLIDE 4 & 5: シーン別 ===== */
+  .scene-list { display: flex; flex-direction: column; gap: 10px; }
+  .scene-row {
+    display: flex; align-items: center; gap: 10px;
+    background: #f8f9ff; border-radius: 50px;
+    padding: 12px 16px;
+  }
+  .scene-emoji { font-size: 22px; flex-shrink: 0; width: 30px; text-align: center; }
+  .scene-label { font-size: 14px; font-weight: 700; color: #1a1a2e; flex: 1; }
+  .scene-arrow { color: #666; font-size: 16px; flex-shrink: 0; }
+  .scene-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    border-radius: 20px; padding: 5px 14px;
+    font-size: 13px; font-weight: 700; flex-shrink: 0;
+    color: white;
+  }
+  .scene-badge.gpt { background: #10A37F; }
+  .scene-badge.claude { background: #D97706; }
+  .scene-badge.gemini { background: #4285F4; }
+  .scene-badge.both {
+    background: linear-gradient(to right, #10A37F 50%, #D97706 50%);
+  }
+  .scene-reason { font-size: 12px; color: #555; flex-shrink: 0; text-align: right; min-width: 80px; }
+
+  .slide4-wrap {
+    background: white; margin: 16px; border-radius: 20px;
+    padding: 28px 20px 20px;
+    box-shadow: 0 2px 16px rgba(100,120,200,0.08);
+  }
+  .slide5-wrap {
+    background: #f8f9ff; margin: 16px; border-radius: 20px;
+    padding: 28px 20px 20px;
+    box-shadow: 0 2px 16px rgba(100,120,200,0.08);
+  }
+
+  /* ===== SLIDE 6: 無料でOK ===== */
+  .free-layout { display: flex; gap: 12px; align-items: stretch; }
+  .free-main {
+    flex: 1;
+    background: white; border: 2px solid #e0e0e0;
+    border-radius: 16px; padding: 20px 16px;
+    text-align: center;
+  }
+  .free-main-label { font-size: 14px; font-weight: 700; color: #444; margin-bottom: 16px; }
+  .free-checks { display: flex; justify-content: center; gap: 16px; margin-bottom: 14px; }
+  .free-check { font-size: 32px; }
+  .free-big {
+    font-size: 26px; font-weight: 900; color: #1a1a2e;
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+  }
+  .free-big .mark { font-size: 32px; color: #10A37F; }
+  .free-side {
+    width: 120px; flex-shrink: 0;
+    background: #f5f5f5; border-radius: 16px;
+    padding: 16px 12px;
+  }
+  .free-side-label { font-size: 12px; font-weight: 700; color: #666; margin-bottom: 10px; text-align: center; }
+  .free-side-item { font-size: 11px; color: #555; margin-bottom: 6px; line-height: 1.5; }
+  .slide6-note {
+    background: #f0fdf8; border-radius: 10px; padding: 12px 16px;
+    font-size: 13px; font-weight: 600; color: #065f46;
+    text-align: center; margin-top: 14px;
+  }
+
+  /* ===== SLIDE 7: 順番ステップ ===== */
+  .step-flow { display: flex; flex-direction: column; gap: 0; position: relative; }
+  .step-item {
+    display: flex; gap: 16px; align-items: flex-start;
+    padding: 16px 0;
+    border-bottom: 1px dashed #e0e4ff;
+  }
+  .step-item:last-child { border-bottom: none; }
+  .step-circle {
+    width: 52px; height: 52px; border-radius: 50%;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 700; letter-spacing: 1px;
+    color: white; flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+  .step-circle .num { font-size: 20px; font-weight: 900; line-height: 1; }
+  .step-circle.s1 { background: #10A37F; }
+  .step-circle.s2 { background: #4285F4; }
+  .step-circle.s3 { background: #D97706; }
+  .step-body { flex: 1; padding-top: 4px; }
+  .step-who {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 14px; font-weight: 700; color: #1a1a2e; margin-bottom: 4px;
+  }
+  .step-desc { font-size: 13px; color: #555; line-height: 1.6; }
+
+  /* ===== SLIDE 8: CTA ===== */
+  .slide-cta {
+    background: linear-gradient(160deg, #eef0ff 0%, #f5f0ff 100%);
+    margin: 16px; border-radius: 20px;
+    padding: 36px 24px;
+    text-align: center;
+    box-shadow: 0 2px 16px rgba(100,120,200,0.1);
+  }
+  .cta-title {
+    font-size: 20px; font-weight: 900; color: #1a1a2e;
+    margin-bottom: 16px; line-height: 1.5;
+  }
+  .cta-desc {
+    font-size: 14px; color: #444; line-height: 1.9; margin-bottom: 24px;
+  }
+  .cta-chars {
+    display: flex; justify-content: center; gap: 16px; margin-top: 24px;
+  }
+  .cta-char { font-size: 48px; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- SLIDE 1: カバー -->
+  <div class="slide-cover">
+    <div class="cover-badge">LINE登録ありがとうございます🎁</div>
+    <div class="cover-h1">ChatGPT・Claude・Gemini<br>どれを使えばいい？</div>
+    <div class="cover-sub">3つの違いと使い分けをまるっと解説</div>
+    <div class="cover-chars">
+      <span class="char-icon">🤖</span>
+      <span class="char-icon mid">🦉</span>
+      <span class="char-icon">🤖</span>
+    </div>
+    <p class="cover-credit">AI START CLUB</p>
+  </div>
+
+  <!-- SLIDE 2: 得意技が違う相棒 -->
+  <div class="slide">
+    <div class="slide-title">3つのAIは「得意技が違う相棒」です</div>
+    <div class="partner-grid">
+      <div class="partner-card">
+        <span class="partner-badge gpt">なんでもこなす</span>
+        <span class="partner-char">🤖</span>
+        <div class="partner-note">ChatGPT</div>
+      </div>
+      <div class="partner-card">
+        <span class="partner-badge claude">文章のプロ</span>
+        <span class="partner-char">🦉</span>
+        <div class="partner-note">Claude</div>
+      </div>
+      <div class="partner-card">
+        <span class="partner-badge gemini">情報収集の達人</span>
+        <span class="partner-char">🤖</span>
+        <div class="partner-note">Gemini</div>
+      </div>
+    </div>
+    <div class="slide2-footer">
+      自分の目的に合わせて『相棒』を選ぶのが、AIマスターへの第一歩！
+    </div>
+  </div>
+
+  <!-- SLIDE 3: 徹底比較 -->
+  <div class="slide">
+    <div class="slide-title">3つのAIを徹底比較！<br>それぞれの特徴とおすすめの人</div>
+    <div class="compare-grid">
+
+      <div class="compare-card gpt">
+        <div class="compare-head">
+          <span class="compare-emoji">🤖</span>
+          <div class="compare-nameblock">
+            <div class="compare-name">ChatGPT（OpenAI）</div>
+            <div class="compare-catch">なんでもこなすオールラウンダー</div>
+          </div>
+        </div>
+        <div class="compare-body">
+          <div class="compare-feat"><span class="feat-check">✅</span><span>幅広い用途に対応。とりあえずこれで始めれば間違いない</span></div>
+          <div class="compare-feat"><span class="feat-check">✅</span><span>プラグイン・画像生成・音声入力にも対応（有料版）</span></div>
+          <div class="compare-feat"><span class="feat-check">✅</span><span>情報量が多く、回答の質が安定している</span></div>
+        </div>
+        <div class="compare-rec">おすすめの人：「まず1つだけ使いたい」初心者</div>
+      </div>
+
+      <div class="compare-card claude">
+        <div class="compare-head">
+          <span class="compare-emoji">🦉</span>
+          <div class="compare-nameblock">
+            <div class="compare-name">Claude（Anthropic）</div>
+            <div class="compare-catch">長文・文章作成の専門家</div>
+          </div>
+        </div>
+        <div class="compare-body">
+          <div class="compare-feat"><span class="feat-check">✅</span><span>長い文章の読み込み・要約が得意</span></div>
+          <div class="compare-feat"><span class="feat-check">✅</span><span>文章のトーンが自然で日本語が読みやすい</span></div>
+          <div class="compare-feat"><span class="feat-check">✅</span><span>安全性・倫理的な判断を重視した設計</span></div>
+        </div>
+        <div class="compare-rec">おすすめの人：文章作成・資料分析をよくする人</div>
+      </div>
+
+      <div class="compare-card gemini">
+        <div class="compare-head">
+          <span class="compare-emoji">🤖</span>
+          <div class="compare-nameblock">
+            <div class="compare-name">Gemini（Google）</div>
+            <div class="compare-catch">Googleと連携できる情報収集の達人</div>
+          </div>
+        </div>
+        <div class="compare-body">
+          <div class="compare-feat"><span class="feat-check">✅</span><span>Google検索・Gmail・Googleドライブと連携できる</span></div>
+          <div class="compare-feat"><span class="feat-check">✅</span><span>最新情報を反映しやすい</span></div>
+          <div class="compare-feat"><span class="feat-check">✅</span><span>Androidスマホとの相性が抜群</span></div>
+        </div>
+        <div class="compare-rec">おすすめの人：Googleサービスをよく使う人・Androidユーザー</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SLIDE 4: シーン別（日常・アイデア） -->
+  <div class="slide4-wrap">
+    <div class="slide-title">シーン別おすすめAI（日常・アイデア編）</div>
+    <div class="scene-list">
+      <div class="scene-row">
+        <span class="scene-emoji">🔍</span>
+        <span class="scene-label">初めて使う</span>
+        <span class="scene-arrow">→</span>
+        <span class="scene-badge gpt">🤖 ChatGPT</span>
+        <span class="scene-reason">情報が多く調べやすい</span>
+      </div>
+      <div class="scene-row">
+        <span class="scene-emoji">💡</span>
+        <span class="scene-label">アイデア出し・企画</span>
+        <span class="scene-arrow">→</span>
+        <span class="scene-badge gpt">🤖 ChatGPT</span>
+        <span class="scene-reason">発想の幅が広い</span>
+      </div>
+      <div class="scene-row">
+        <span class="scene-emoji">📱</span>
+        <span class="scene-label">SNS投稿文を作る</span>
+        <span class="scene-arrow">→</span>
+        <span class="scene-badge both">🤖 / 🦉</span>
+        <span class="scene-reason">好みで選んでOK</span>
+      </div>
+      <div class="scene-row">
+        <span class="scene-emoji">🔤</span>
+        <span class="scene-label">英語の翻訳・文章</span>
+        <span class="scene-arrow">→</span>
+        <span class="scene-badge gpt">🤖 ChatGPT</span>
+        <span class="scene-reason">英語の精度が高い</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 5: シーン別（仕事・情報収集） -->
+  <div class="slide5-wrap">
+    <div class="slide-title">シーン別おすすめAI（仕事・情報収集編）</div>
+    <div class="scene-list">
+      <div class="scene-row">
+        <span class="scene-emoji">✉️</span>
+        <span class="scene-label">メール・文章作成</span>
+        <span class="scene-arrow">→</span>
+        <span class="scene-badge claude">🦉 Claude</span>
+        <span class="scene-reason">自然な日本語</span>
+      </div>
+      <div class="scene-row">
+        <span class="scene-emoji">📄</span>
+        <span class="scene-label">長い資料を読み込む</span>
+        <span class="scene-arrow">→</span>
+        <span class="scene-badge claude">🦉 Claude</span>
+        <span class="scene-reason">大量テキストに強い</span>
+      </div>
+      <div class="scene-row">
+        <span class="scene-emoji">🌐</span>
+        <span class="scene-label">最新情報を調べる</span>
+        <span class="scene-arrow">→</span>
+        <span class="scene-badge gemini">🤖 Gemini</span>
+        <span class="scene-reason">Google検索と連携</span>
+      </div>
+      <div class="scene-row">
+        <span class="scene-emoji">📱</span>
+        <span class="scene-label">スマホで使いたい</span>
+        <span class="scene-arrow">→</span>
+        <span class="scene-badge gemini">🤖 Gemini</span>
+        <span class="scene-reason">Androidとの相性◎</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 6: 無料でOK -->
+  <div class="slide">
+    <div class="slide-title">基本プレイ無料！まずは課金なしでOK</div>
+    <div class="free-layout">
+      <div class="free-main">
+        <div class="free-main-label">無料プラン（Free Plan）</div>
+        <div class="free-checks">
+          <span class="free-check">🤖✅</span>
+          <span class="free-check">🦉✅</span>
+          <span class="free-check">🤖✅</span>
+        </div>
+        <div class="free-big"><span class="mark">◎</span> 無料で十分使える</div>
+      </div>
+      <div class="free-side">
+        <div class="free-side-label">有料プラン（Premium）</div>
+        <div class="free-side-item">ChatGPT Plus：月約3,000円</div>
+        <div class="free-side-item">Claude Pro：月約3,000円</div>
+        <div class="free-side-item">Gemini Advanced：月約2,900円</div>
+      </div>
+    </div>
+    <div class="slide6-note">まずは全部無料で試してみてください。有料にするのはもっと使いたくなってからで十分です</div>
+  </div>
+
+  <!-- SLIDE 7: 順番 -->
+  <div class="slide">
+    <div class="slide-title">迷ったらこの順番で試してみよう</div>
+    <div class="step-flow">
+      <div class="step-item">
+        <div class="step-circle s1"><span style="font-size:9px;letter-spacing:1px">STEP</span><span class="num">1</span></div>
+        <div class="step-body">
+          <div class="step-who">🤖 まずは王道のChatGPTを触ってみる</div>
+          <div class="step-desc">情報が多く、使い方を調べやすい。プロンプト10選を使って最初の体験をしてみよう。</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-circle s2"><span style="font-size:9px;letter-spacing:1px">STEP</span><span class="num">2</span></div>
+        <div class="step-body">
+          <div class="step-who">🤖 次に最新情報に強いGeminiで検索してみる</div>
+          <div class="step-desc">Googleと連携できる強みを実感。スマホアプリとの相性も抜群。</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-circle s3"><span style="font-size:9px;letter-spacing:1px">STEP</span><span class="num">3</span></div>
+        <div class="step-body">
+          <div class="step-who">🦉 最後にClaudeで長文を要約させて違いを実感する</div>
+          <div class="step-desc">自然な日本語の文章力と、長い資料を扱う力を体験しよう。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 8: CTA -->
+  <div class="slide-cta">
+    <div class="cta-title">もっと自分に合った使い方を<br>知りたい方へ🙌</div>
+    <div class="cta-desc">
+      LINEからアンケートを回答してください！<br>
+      あなたのタイプ別プレゼントが届きます😊
+    </div>
+    <div class="cta-chars">
+      <span class="cta-char">🤖</span>
+      <span class="cta-char">🦉</span>
+      <span class="cta-char">🤖</span>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
